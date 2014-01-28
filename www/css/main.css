@@ -1,0 +1,204 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: verdana, helvetica, sans-serifs;
+	font-size: 13px;
+}
+
+#annotation_area {
+	padding: 10px;
+}
+
+
+
+#nav_toolbar {
+	width: 100px;
+	margin-top: 10px;
+}
+
+#prev, #next{
+	text-align: center;
+	float: left;
+	width: 18px;
+	font-size: 12px;
+	margin: 2px 2px 2px 0px;
+	color: rgb(80,80,80);
+	border: solid 1px rgb(140,140,140);
+	cursor: pointer;
+	border-top: rgb(230,230,230) 1px solid;
+	border-left: rgb(230,230,230) 1px solid;
+	border-bottom: rgb(140,140,140) 1px solid;
+	border-right: rgb(140,140,140) 1px solid;
+}
+
+#prev {
+}
+
+#next {
+}
+
+#the-canvas {
+	border-top: rgb(230,230,230) 1px solid;
+	border-left: rgb(230,230,230) 1px solid;
+	border-bottom: rgb(140,140,140) 1px solid;
+	border-right: rgb(140,140,140) 1px solid;
+}
+
+/* LINK STYLING */
+a:link {
+	font-weight: bold:
+	text-decoration: none;
+	color: rgb(40,50,175);
+}
+
+a:visited {
+	font-weight: bold:
+	color: rgb(40,50,175);
+	text-decoration: none;
+}
+
+a:hover {
+	font-weight: bold:
+	color: rgb(40,50,175);
+	text-decoration: underline;
+}
+
+a:active {
+	font-weight: bold:
+	color: rgb(40,50,175);
+	text-decoration: underline;
+}
+
+a{
+	font-weight: bold;
+	color: rgb(40,50,175);
+	cursor: pointer;
+}
+
+
+/* Controlling spacing and placement */
+span.right {
+	display: block;
+	float: right;
+}
+
+span.left {
+	display: block;
+	float: left;
+}
+
+.clear {
+	clear:both;
+}
+
+.hidden {
+	display: none;
+}
+
+.vert20 {
+	display: block;
+	height: 20px;
+}
+
+.vert10{
+	display: block;
+	height: 10px;
+}
+
+
+/* Bassic Chassis */
+#right {
+	float: left;
+/*	border: solid 1px purple;*/
+}
+
+#left{
+	float: left;
+/*	border: solid 1px purple;*/
+}
+
+#form_area {
+	margin: 26px 0;
+}
+
+textarea {
+	border-top: rgb(230,230,230) 1px solid;
+	border-left: rgb(230,230,230) 1px solid;
+	border-bottom: rgb(140,140,140) 1px solid;
+	border-right: rgb(140,140,140) 1px solid;
+}
+
+.clip {
+	font-size: 11px;
+	color: rgb(80,80,80);
+}
+
+.edit_clip_wrapper{
+}
+
+.highlighted {
+	background: rgb(255,255,205);
+}
+
+.keywords_header, .description_header {
+	font-weight: bold;
+	text-align: center;
+	border-bottom: rgb(140,140,140) 1px solid;
+}
+
+.keywords_header {
+	float: left;
+	width: 200px;
+	margin-right: 2px
+}
+
+.description_header {
+	float: left;
+	width: 200px;
+	margin-left: 2px
+}
+
+
+.clip_header {
+	border-top: rgb(140,140,140) 3px solid;
+	margin-bottom: 10px;
+}
+
+#clips_wrapper {
+	border-bottom: rgb(140,140,140) 3px solid;
+	padding-bottom: 10px;
+}
+
+.keywords {
+	float: left;
+	width: 200px;
+	margin: 4px
+}
+
+.description {
+	float: left;
+	width: 200px;
+	margin: 4px;
+}
+
+.clip_pending {
+	border: solid 1px orange;
+}
+
+.edit_active {
+	background: rgb(255,255,255);
+}
+
+#footer {
+}
+
+
+/* Font and Color */
+.red_text{
+	color: red;
+}
+
+.text_center {
+	text-align: center
+}
+
