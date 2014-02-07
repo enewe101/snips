@@ -3,14 +3,6 @@ var page = 1;
 var clip_id_inc = 1;
 
 
-function init() {
-
-	get_source(source_id, on_get_source);
-
-	view_layout();
-	view_bind_events();
-
-}
 
 function on_get_source(data) {
 	data = data[0];

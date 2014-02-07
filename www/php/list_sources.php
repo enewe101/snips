@@ -42,7 +42,7 @@
 
 	<body>
 <?php
-	$link_prefix = 'http://shpow.com/snips?source_id=';
+	$link_prefix = 'http://shpow.com/snips/snipper.php?source_id=';
 	while($row = mysqli_fetch_assoc($result)) {
 		$name = $row['display_name'];
 		$id = $row['id'];
