@@ -1,6 +1,6 @@
 <?php
 	require_once $_SERVER['DOCUMENT_ROOT'] . '/common/php/db.php'; 
-	$TABLE_NAME = 'sources';
+	$TABLE_NAME = 'clips';
 	$DB_NAME = 'uedwardn_clips';
 
 	# Get a connection to the database
@@ -13,14 +13,16 @@
 	$posted_vars = get_vars($posted_var_names);
 	
 	# Make an sql insert statement
-	$sql = get_sql_select_query($conn, $TABLE_NAME, $posted_vars);
+	$sql = get_sql_delete_query($conn, $TABLE_NAME, $posted_vars);
 
 	# Query the db
 	$result = mysqli_query($conn, $sql);
 	if($err = mysqli_error($conn)) {
 		echo '{"success":false, "error":"'.$sql.'"}';
 	} else {
-		echo result2json($result);
+		//echo '{"sql":"' . $sql . '"}';
+		//echo result2json($result);
+		echo '{"success":"true"}';
 	}
 
 ?>

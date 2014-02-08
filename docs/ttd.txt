@@ -1,0 +1,9 @@
+
+- make controler state changes happen as close to the event trigger as possible
+	to prevent buried state changes from introducing surprises.
+
+- handle the case where a snip is still pending it's save request and the
+	user deletes it -- it's probably ok to silently do nothing.  You can't 
+	delete it (there's no id yet, and the delete would race with the insert
+	anyway) and the silence is signal because the user expects the snip to
+	dissappear but it doesn't.

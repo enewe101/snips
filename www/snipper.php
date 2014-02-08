@@ -57,6 +57,7 @@ if(is_null($source_id)) {
 						</div>
 						<div class='clear'></div>
 					</div>
+
 					<div id='clips_wrapper'></div>
 
 				</div>

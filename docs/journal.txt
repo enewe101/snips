@@ -1,0 +1,54 @@
+19 January 2014
+	I hooked up a pdf rendering package, and made a basic pane that lets
+	you add clips to the database.  Right now, this page (currently index
+	but that will change) has source_id hardcoded in the javascript 
+	(add_snip.js) and the pdf file to load is hardcoded too.  
+
+	Next to build would be a sources selection page, which should link to
+	the above page and set the source_id and load the correct pdf.
+
+7 Feb 2014
+	I renamed the view that was previously at `index.php` to `snipper.php`.
+	The point of this view is to present a context in which a source has been
+	selected, the source is being viewed in a right pane, and the user can add
+	snips (which are associated to that source in the left pane)
+
+	I added a really bare source selector page to start working on aspects
+	of the snipper that rely on sources.
+
+	I did a bunch of work to separate the view from the controller.  Now the
+	controller doesn't handle any layout or styling concerns at all -- it 
+	delegates these tasks to the view.  I keep the view dumb, so it does not
+	maintain an internal pointer or anything.  So, for example, moving the
+	highlighted snip as the user hits `j` and `k` is accomplished by sending
+	to the view the requests to highlight `idx` snip.  The view supports a 
+	highlight function but doesn't know about internal pointers or anything.
+
+	This has made the code much simpler, in particular, the keystroke handling
+	and state changes are much clearer.
+
+	I removed handling the `TAB` key in favor of responding to the 
+	`view.desc_editor` and `view.keyword_editor` focus and blur events.  This
+	automatically brings in the ability to click into the textareas, while
+	using `TAB` still behaves as expected since it triggers focus and blur.
+
+	A problem with that, though, is that if, while editing a newly inserted
+	snip, the user leaves the `keywords`
+	empty (maybe they don't know what keywords to write yet) and then tabs to 
+	the `description`, they the currently edited snip closes (because the
+	`blur` of `keyword` before entering desc triggers a `save_and_clear()`.
+
+	I'm not sure how to handle this.  One way is to allow blank snips, and to
+	stop removing them in `save_and_clear()`.  Deleting a blank snip would 
+	require action.  This is probably not a bad idea.
+
+	NEXT
+
+	- handle tabbing accross blank keywords
+	- add mathJax, so that you can write in latex
+	- allow sorting of snips, and persist the sorting in the db
+
+8 Feb 2014
+	I made it so that empty snips do save.
+
+	I added the ability to delete snips.

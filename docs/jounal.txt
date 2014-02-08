@@ -1,8 +1,0 @@
-19 January 2014
-	I hooked up a pdf rendering package, and made a basic pane that lets
-	you add clips to the database.  Right now, this page (currently index
-	but that will change) has source_id hardcoded in the javascript 
-	(add_snip.js) and the pdf file to load is hardcoded too.  
-
-	Next to build would be a sources selection page, which should link to
-	the above page and set the source_id and load the correct pdf.

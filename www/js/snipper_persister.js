@@ -45,6 +45,22 @@ function get_source(source_id, callback) {
 	});
 }
 
+function get_snips(source_id, callback) {
+
+	$.ajax({
+		'url' : 'php/get_snips.php',
+		'type': 'POST',
+		'data': {'source_id': source_id},
+		'dataType': 'json',
+		'success': function(data, textStatus, jqXHR) {
+			callback(data);
+		},
+		'error': function(jqXHR, status, err) {
+			alert(err);
+		}
+	});
+}
+
 function save_snip(data, callback) {
 	
 	// expects data in this form:
@@ -68,7 +84,7 @@ function save_snip(data, callback) {
 	});
 }
 
-function update_snip(data, callback) {
+function update_snip(snip_obj, callback) {
 	
 	// expects data in this form:
 	//	{
@@ -77,11 +93,25 @@ function update_snip(data, callback) {
 	//		'desc':desc_text,
 	//		'source_id':source_id
 	//	}
-	
 	$.ajax({
 		'url' : 'php/update_snip.php',
 		'type': 'POST',
-		'data': data,
+		'data': snip_obj,
+		'dataType': 'json',
+		'success': function(data, textStatus, jqXHR) {
+			callback(data);
+		},
+		'error': function(jqXHR, status, err) {
+			alert(err);
+		}
+	});
+}
+
+function delete_snip(snip_obj, callback) {
+	$.ajax({
+		'url' : 'php/delete_snip.php',
+		'type': 'POST',
+		'data': snip_obj,
 		'dataType': 'json',
 		'success': function(data, textStatus, jqXHR) {
 			callback(data);
