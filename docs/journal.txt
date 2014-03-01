@@ -52,3 +52,79 @@
 	I made it so that empty snips do save.
 
 	I added the ability to delete snips.
+
+16 Feb 2014
+	I think that the core application should support these views
+
+	0) Dashboard
+		- Add new source
+		- Shows topics
+		- Recently Read
+		- Recently Added
+		- Share topic
+		- Manage profile
+
+	2) All Topics
+		- delete / add / edit
+		- shows: topic name, number of references, shared, invite, view topic
+
+	3) Topic View
+		- lists all sources -- same info as source view
+		- add new / existing source
+		- invite
+		- edit / delete
+
+	*4) A source browsing interface
+		- Show the bibliogrophic info, toggleable to see the unlikely info
+		- Allow searching by keyword, accross all fields, with a higher 
+			priority on annotations
+		- Allow openning a pdf for reading
+		- dowload source
+
+	*5) Reader View
+		- This is a way of viewing a particular source
+		- Selectable text
+		- Put sticky notes
+		- Draw on pdf
+		- scrolling view
+
+	*6) Notes
+		- similar to a sources view, but lists annotations
+		- therefore sources may occur many times
+		- available as an alternate view whereever a source-list might go,
+			e.g. available when viewing a particular topic, or a particular 
+			source
+
+	7) Source details view
+		- Shows the details -- all fields -- associated to a view
+		- Also lists the notes
+		- Everything is editable
+		- You can upload a pdf
+
+	Rethinking the reader view
+	Have a note-pad at right.  No more keywords.  Just hit enter for a new
+	note.  Light horizontal bars between notes.  Shift enter to do newline
+	without making a new note.  Always have focus on notepad.  Editing
+	happens in a textarea that's made dynamically.  Becomes a div when done.
+	Esc has the same affect as enter.  Tab inserts tabs.
+
+28 Feb 2014
+
+	What will the view of a source be like?
+	- probably, there will be three separate views associated with a source:
+		- Notes view: shows all of the notes for the source
+		- Detail view: shows all the fields for the view (no matter what fields
+			are currently 'visible', and is editable.
+		- Reader view: shows the pdf of the source, with a notepad alongside
+
+
+	What is the relationship between notes, sources, and topics?
+	- Sources get assigned a topic
+	- When a new note is created, it inherits the topits associated to the 
+		source, as a default, but it's editable
+	- When a given source that already has notes gets a topic, default is to
+		apply the topic to all the notes, but this will be optional later.
+
+
+	To be built now:
+	- build the reader view with notes enabled.

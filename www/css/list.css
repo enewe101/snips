@@ -1,0 +1,9 @@
+div.list_elm {
+	float: left;
+}
+
+div.list_sep {
+	float: left;
+	width: 10px;
+	height: 10px;
+}

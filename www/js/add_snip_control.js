@@ -1,15 +1,32 @@
 window.onload = init;
 var page = 1;
 var clip_id_inc = 1;
+var pdf_viewer;
 
 
+function init() {
 
-function get_snips(source_id, callback) {
+	pdf_viewer = new PDFViewer($('#pdf_view_wrapper'));
+	get_source(source_id, on_get_source);
+	
+	view_layout();
+	view_bind_events();
+
+}
+
+
+function on_get_source(data) {
+	data = data[0];
+	var url = 'pdfs/' + data['path'];
+	pdf_viewer.get_document(url); 
+}
+
+function get_source(source_id, callback) {
 
 	$.ajax({
-		'url' : 'php/get_snips.php',
+		'url' : 'php/get_source.php',
 		'type': 'POST',
-		'data': {'source_id': source_id},
+		'data': {'id': source_id},
 		'dataType': 'json',
 		'success': function(data, textStatus, jqXHR) {
 			callback(data);
@@ -43,7 +60,7 @@ function save_snip(data, callback) {
 	});
 }
 
-function update_snip(snip_obj, callback) {
+function update_snip(data, callback) {
 	
 	// expects data in this form:
 	//	{
@@ -52,25 +69,11 @@ function update_snip(snip_obj, callback) {
 	//		'desc':desc_text,
 	//		'source_id':source_id
 	//	}
+	
 	$.ajax({
 		'url' : 'php/update_snip.php',
 		'type': 'POST',
-		'data': snip_obj,
-		'dataType': 'json',
-		'success': function(data, textStatus, jqXHR) {
-			callback(data);
-		},
-		'error': function(jqXHR, status, err) {
-			alert(err);
-		}
-	});
-}
-
-function delete_snip(snip_obj, callback) {
-	$.ajax({
-		'url' : 'php/delete_snip.php',
-		'type': 'POST',
-		'data': snip_obj,
+		'data': data,
 		'dataType': 'json',
 		'success': function(data, textStatus, jqXHR) {
 			callback(data);

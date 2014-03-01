@@ -7,6 +7,10 @@ body {
 
 #annotation_area {
 	padding: 10px;
+	border-top: rgb(230,230,230) 1px solid;
+	border-left: rgb(230,230,230) 1px solid;
+	border-bottom: rgb(140,140,140) 1px solid;
+	border-right: rgb(140,140,140) 1px solid;
 }
 
 
@@ -37,12 +41,6 @@ body {
 #next {
 }
 
-#the-canvas {
-	border-top: rgb(230,230,230) 1px solid;
-	border-left: rgb(230,230,230) 1px solid;
-	border-bottom: rgb(140,140,140) 1px solid;
-	border-right: rgb(140,140,140) 1px solid;
-}
 
 /* LINK STYLING */
 a:link {
@@ -112,20 +110,16 @@ span.left {
 /*	border: solid 1px purple;*/
 }
 
-#left{
-	float: left;
-/*	border: solid 1px purple;*/
-}
 
 #form_area {
 	margin: 26px 0;
 }
 
 textarea {
-	border-top: rgb(230,230,230) 1px solid;
-	border-left: rgb(230,230,230) 1px solid;
-	border-bottom: rgb(140,140,140) 1px solid;
-	border-right: rgb(140,140,140) 1px solid;
+	border-bottom: rgb(230,230,230) 1px solid;
+	border-right: rgb(230,230,230) 1px solid;
+	border-top: rgb(140,140,140) 1px solid;
+	border-left: rgb(140,140,140) 1px solid;
 }
 
 .clip {

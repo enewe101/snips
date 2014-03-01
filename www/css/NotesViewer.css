@@ -1,0 +1,64 @@
+.kill_space {
+	width: 24px;
+	height: 24px;
+}
+
+
+.kill_visible {
+	background: no-repeat 4px 2px url('../images/kill.png');
+}
+
+.kill_hover {
+	background: no-repeat 4px 2px url('../images/kill_hover.png');
+}
+
+.kill {
+	width: 24px;
+	height: 24px;
+}
+
+#notes_wrapper {
+	padding: 10px 20px 10px 20px;
+}
+
+h2 {
+	color: rgb(120,120,120);
+	margin: 20px 20px 0 20px;
+	padding: 0;
+	border-bottom: solid 10px rgb(140,140,140);
+}
+
+.empty_text {
+	color: rgb(140, 140, 140);
+}
+
+#pdf_view_wrapper {
+}
+
+#right {
+	float: left;
+	padding: 10px;
+	background: rgb(230, 230, 230);
+	overflow: scroll;
+}
+
+.canvas {
+	margin-bottom: 20px;
+	border-top: rgb(230,230,230) 1px solid;
+	border-left: rgb(230,230,230) 1px solid;
+	border-bottom: rgb(140,140,140) 1px solid;
+	border-right: rgb(140,140,140) 1px solid;
+}
+
+#left{
+	float: left;
+	overflow: scroll;
+}
+
+.edit_display {
+	border: solid 1px white;
+}
+
+.edit_display_hover {
+	border: solid 1px rgb(230, 230, 230);
+}

@@ -14,25 +14,14 @@ if(is_null($source_id)) {
 		<script type='text/javascript' src='../../common/js/jquery.js'>
 		</script>
 		<script type='text/javascript' src='js/pdf.js'></script>
+		<script type='text/javascript' src='js/app_lib.js'></script>
 		<script type='text/javascript'>
-			var debug = true;
 			var source_id = <?php echo $source_id; ?>;
 		</script>
+		<script type='text/javascript' src='js/reader_control.js'></script>
+		<script type='text/javascript' src='js/reader_model.js'></script>
 		<script type='text/javascript' src='js/reader_view.js'></script>
-		<script type='text/javascript' src='js/PDFViewer.js'></script>
-		<script type='text/javascript' src='js/NotesViewer.js'></script>
-		<script type='text/javascript' src='js/List.js'></script>
-		<script type='text/javascript' src='js/app_lib.js'></script>
-		<script type='text/javascript' src='js/editable_text.js'></script>
-		<script type='text/x-mathjax-config'>
-			MathJax.Hub.Config(
-				{tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-		</script>
-		<script type='text/javascript' src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
 		<link rel='stylesheet' type='text/css' href='css/main.css' />
-		<link rel='stylesheet' type='text/css' href='css/list.css' />
-		<link rel='stylesheet' type='text/css' href='css/NotesViewer.css' />
 		<link rel='stylesheet' type='text/css' href='../../common/css/basic.css' />
 	</head>
 	<body>
@@ -45,13 +34,43 @@ if(is_null($source_id)) {
 		</div>
 
 		<div id='middle'>
-			<!--div id='right'>
-				<div id='pdf_view_wrapper'></div>
+
+			<div id='right'>
+
+				<div id="nav_toolbar">
+					<div id="prev">&lt;</div>
+					<div id="next">&gt;</div>
+					<div class="clear"></div>
+				</div>
+
+				<canvas id="the-canvas">
+				</canvas>
+
 			</div>
 
 			<div id='left'>
-				<div id='notes_wrapper'> </div>
-			</div-->
+				<div id='annotation_area'>
+
+					<div id='form_area'>
+
+						<div class='form_line'>
+							<textarea name='desc' id='desc'></textarea>
+						</div>
+					</div>
+
+					<div class='clip_header'>
+						<div class='description_header'>
+							Description
+						</div>
+						<div class='clear'></div>
+					</div>
+
+					<div id='clips_wrapper'></div>
+
+				</div>
+			</div>
+
+
 		</div>
 
 		<div id='footer'>

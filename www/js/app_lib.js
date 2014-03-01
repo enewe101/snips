@@ -1,65 +1,106 @@
-function form_def_to_html(form_def, formatting) {
-	html_form_elements = [];
-	for(var key in form_def) {
 
-		var input_name = form_def[key]['name'];
-
-		field_directives = formatting[input_name] || false;
-
-		// decide whether to build a form field for this table column
-		var do_buil = true;
-		if(field_directives && 'type' in field_directives) {
-			if(field_directives['type'] == 'exclude') {
-				continue;
-			}
-		}
-
-		// figure out what the display name should be
-		var display_name = input_name;
-		if(input_name in formatting) {
-			if('display_name' in formatting[input_name]) {
-				display_name = formatting[input_name]['display_name'];
-			}
-		}
-		var new_inputs = [$('<input/>', {'type':'text'})];
-		var new_label = $('<label/>', {'html':display_name});
-
-		html_form_elements.push({"label":new_label, "inputs":new_inputs});
+function get_opt(keyname, obj, default_val) {
+	if(keyname in obj) {
+		return obj[keyname];
+	} else {
+		return default_val;
 	}
-	return html_form_elements;
 }
 
-function form_factory(form_def) {
-	form_html = [];
-	for(key in form_def) {
-		var field_def = form_def[key];
-		var type = field_def['type'];
-		switch(type) {
-			case 'text':
-				var new_input = $('<input/>', {
-					'type':field_def['type'],
-					'id': field_def['name'],
-					'name': field_def['name']
-				});
-				var new_label = $('<label/>', {
-					'html': field_def['display_name'] || field_def['name'],
-					'for':field_def['name']
-				});
-				break;
-			default:
-				var new_input = $('<input/>', {
-					'type':field_def['type'],
-					'id': field_def['name'],
-					'name': field_def['name']
-				});
-				var new_label = $('<label/>', {
-					'html':field_def['name'],
-					'for':field_def['name']
-				});
-				break;
-		}
-		form_html.push({'input':new_input, 'label':new_label});
-	}
-	return form_html;
+function get_source(source_id, callback) {
 
+	$.ajax({
+		'url' : 'php/get_source.php',
+		'type': 'POST',
+		'data': {'id': source_id},
+		'dataType': 'json',
+		'success': function(data, textStatus, jqXHR) {
+			callback(data);
+		},
+		'error': function(jqXHR, status, err) {
+			alert(err);
+		}
+	});
 }
+
+
+function get_snips(source_id, callback) {
+
+	$.ajax({
+		'url' : 'php/get_snips.php',
+		'type': 'POST',
+		'data': {'source_id': source_id},
+		'dataType': 'json',
+		'success': function(data, textStatus, jqXHR) {
+			callback(data);
+		},
+		'error': function(jqXHR, status, err) {
+			alert(err);
+		}
+	});
+}
+
+function save_snip(data, callback, backlink) {
+	
+	// expects data in this form:
+	//	{
+	//		'desc':desc_text,
+	//		'source_id':source_id
+	//	}
+
+	$.ajax({
+		'url' : 'php/put_snip.php',
+		'type': 'POST',
+		'data': data,
+		'dataType': 'json',
+		'success': function(data, textStatus, jqXHR) {
+			callback(data, backlink);
+		},
+		'error': function(jqXHR, status, err) {
+			alert(err + ':\n' + jqXHR.toSource());
+		}
+	});
+}
+
+function update_snip(snip_obj, callback, backlink) {
+	
+	// expects data in this form:
+	//	{
+	//		'id':clip_id,
+	//		'desc':desc_text,
+	//		'source_id':source_id
+	//	}
+	//
+	
+	$.ajax({
+		'url' : 'php/update_snip.php',
+		'type': 'POST',
+		'data': snip_obj,
+		'dataType': 'json',
+		'success': function(data, textStatus, jqXHR) {
+			callback(data, backlink);
+		},
+		'error': function(jqXHR, status, err) {
+			alert(err);
+		}
+	});
+}
+
+function delete_snip(snip_obj, callback, backlink) {
+	$.ajax({
+		'url' : 'php/delete_snip.php',
+		'type': 'POST',
+		'data': snip_obj,
+		'dataType': 'json',
+		'success': function(data, textStatus, jqXHR) {
+			callback(data, backlink);
+		},
+		'error': function(jqXHR, status, err) {
+			alert(err);
+		}
+	});
+}
+
+function build_add_form() {
+}
+

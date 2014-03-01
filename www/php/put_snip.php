@@ -7,7 +7,7 @@
 	$conn = connect_db($DB_NAME);
 
 	# These are the variables expected via POST
-	$posted_var_names = array('desc', 'keywords', 'source_id');
+	$posted_var_names = array('desc', 'source_id');
 	
 	# Get the POST variables
 	$posted_vars = get_vars($posted_var_names);

@@ -7,7 +7,7 @@
 	$conn = connect_db($DB_NAME);
 
 	# These are the variables expected via POST
-	$posted_var_names = array('id','keywords','desc','source_id');
+	$posted_var_names = array('id', 'desc', 'source_id');
 	
 	# Get the POST variables
 	$posted_vars = get_vars($posted_var_names);
@@ -20,7 +20,7 @@
 	if($err = mysqli_error($conn)) {
 		echo '{"success":false, "error":"'.$sql.'"}';
 	} else {
-		$insert_id = mysqli_insert_id($conn);
+		$insert_id = $posted_vars['id'];
 		echo '{"success":true, "error":null, "id":'.$insert_id.'}';
 	}
 
