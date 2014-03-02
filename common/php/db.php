@@ -33,7 +33,8 @@
 	// 		A database connection object.
 	//
 	function db_connect() {
-		$con = mysqli_connect('localhost', 'uedwardn_root', 'integr8', 'uedwardn_signal');
+		$con = mysqli_connect($GLOBALS['host'], $GLOBALS['user'], 
+			$GLOBALS['pwd'], 'uedwardn_signal');
 		if(mysqli_connect_errno($con)) {
 			echo 'Failed to connect to MySql';
 		}
