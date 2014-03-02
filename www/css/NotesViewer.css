@@ -5,11 +5,11 @@
 
 
 .kill_visible {
-	background: no-repeat 4px 2px url('../images/kill.png');
+	background: no-repeat 4px 6px url('../images/kill.png');
 }
 
 .kill_hover {
-	background: no-repeat 4px 2px url('../images/kill_hover.png');
+	background: no-repeat 4px 6px url('../images/kill_hover.png');
 }
 
 .kill {

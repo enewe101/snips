@@ -39,14 +39,19 @@ function List(options) {
 
 	// State
 	this.items = [];
+	this.header_items = [];
+	this.table;
+
+	// Validations
+	if(!this.wrapper instanceof jQuery) {
+		alert('List(options) expects options.wrapper to be a jQuery');
+	}
+
 
 	this.init = function() {
-		this.make_html();
+		this.table = $('<table class="list_table" />');
+		this.wrapper.append(this.table);
 	};
-
-	this.make_html = function() {
-	};
-
 
 	this.remove = function(index) {
 		var item_to_remove = this.items[index];
@@ -54,52 +59,114 @@ function List(options) {
 		this.items.splice(index, 1);
 	};
 
-	this.add_item = function(contents) {
-		return this.add_item_at(contents, this.items.length);
+
+	this.add_items = function(content_rows, are_headers) {
+
+		// loop variables
+		var first = true;
+		var start;
+		var finish;
+		var added_rows = [];
+
+		// add each row of content
+		for(var i=0; i<content_rows.length; i++) {
+				added_rows.push(this.add_item(content_rows[i], are_headers));
+		}
+
+		// return the index of the first and last row added
+		return added_rows;
 	};
 
-	this.add_item_at = function(contents, index) {
+
+	this.add_item = function(content_row, is_header) {
+		try {
+			var splice_index = (
+				is_header? this.header_items.length : this.items.length);
+			return this.add_item_at(content_row, splice_index, is_header);
+		} catch(e) {
+			alert(e);
+		}
+	};
+
+
+	this.add_item_at = function(content_row, index, is_header) {
+
+		is_header = Boolean(is_header);
 
 		// validation
-		if(debug && (index > this.items.length || index < 0)) {
+		var valid_length = (is_header?  
+			this.header_items.length : this.items.length);
+
+		if(debug && (index > valid_length || index < 0)) {
 			alert('index out of range in List.add_item_at(): ' + index);
 		}
-		if(!$.isArray(contents) && debug) {
+		if(!$.isArray(content_row) && debug) {
 			alert('non array passed to List.add_item(): \n' 
-				+ contents.toSource());
+				+ content_row.toSource());
 		}
-			
-		var new_row = $('<div class="list_row" />');
+
+		var new_row = (is_header?
+			$('<tr class="list_header" />') : $('<tr class="list_row" />'));
 		var new_row_elms = {'wrapper': new_row};
 		var first = true;
 
 		// add checkboxes if its that kind of list
 		if(this.has_checks){
-			var check = $('<input type="checkbox" />');
-			var check_wrap = $('<div class="list_elm" />');
-			check_wrap.append(check);
-			new_row.append(check_wrap);
-			first = false;
-			new_row_elms['check'] = check;
+			
+			// Checkboxes only actually get added to non-header rows
+			if(!is_header) {
+				var check = $('<input type="checkbox" />');
+				var check_wrap = $('<td class="list_elm" />');
+				check_wrap.append(check);
+				new_row.append(check_wrap);
+				first = false;
+				new_row_elms['check'] = check;
+
+			// For header rows, add a spacer
+			} else {
+				var check = $('<span>&nbsp;</span>');
+				var check_wrap = $('<td class="list_elm" />');
+				check_wrap.append(check);
+				new_row.append(check_wrap);
+				first = false;
+				new_row_elms['check'] = check;
+			}
 		}
 
 		// add each piece of content for the row
 		new_row_elms['elms'] = [];
 		for(var i=0; i<this.num_cols; i++) {
 
+			// add vertical separators between elements on a row
 			if(!first) {
-				var new_sep = $('<div class="list_sep" />');
+				var new_sep = $('<td class="list_sep" />');
 				new_row.append(new_sep);
 			}
 
-			var new_elm = $('<div class="list_elm">');
-			var content = contents[i];
+			var new_elm = $('<td class="list_elm">');
+			var content = content_row[i];
+			if(typeof(content) == 'undefined') {
+				alert('i:'+i);
+				alert('length:'+this.items.length);
+				alert('is_header:'+is_header);
+			}
 			
 			if(content instanceof jQuery) {
 				new_elm.append(content);
 
 			} else if(typeof(content)=='string') {
-				new_elm.text(content);
+				if(content.trim() == '') {
+					new_elm.html($('<span class="no_collapse">&nbsp;</span>'));
+				} else {
+					new_elm.text(content);
+				}
+
+			} else if(typeof(content)=='number') {
+				// cast to string
+				new_elm.text('' + content);
+
+			} else if(content === null) {
+				new_elm.html($('<span class="no_collapse">&nbsp;</span>'));
 
 			} else if(debug) {
 				alert('unexpected type of content in List.add_item():\n' +
@@ -111,17 +178,22 @@ function List(options) {
 		}
 
 		// place the new row on the page
-		if(this.items.length == 0) {
-			this.wrapper.append(new_row);
+		var add_to_list = is_header? this.header_items : this.items;
+		if(add_to_list.length == 0) {
+			if(is_header) {
+				this.table.prepend(new_row);
+			} else {
+				this.table.append(new_row);
+			}
 
-		} else if(index == this.items.length) {
-			this.items[index-1].after(new_row);
+		} else if(index == add_to_list.length) {
+			add_to_list[index-1]['wrapper'].after(new_row);
 
 		} else {
-			this.items[index].before(new_row);
+			add_to_list[index]['wrapper'].before(new_row);
 		}
 
-		this.items.splice(index, 0, new_row);
+		add_to_list.splice(index, 0, new_row_elms);
 
 		return new_row_elms;
 	}

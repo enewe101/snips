@@ -36,6 +36,7 @@ if(is_null($source_id)) {
 
 		<link rel='stylesheet' type='text/css' href='css/main.css' />
 		<link rel='stylesheet' type='text/css' href='css/list.css' />
+		<link rel='stylesheet' type='text/css' href='css/SourcesView.css' />
 		<link rel='stylesheet' type='text/css' href='css/NotesViewer.css' />
 		<link rel='stylesheet' type='text/css' href='../../common/css/basic.css' />
 

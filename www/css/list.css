@@ -7,3 +7,14 @@ div.list_sep {
 	width: 10px;
 	height: 10px;
 }
+
+div.list_vert_sep {
+	clear: both;
+	height: 10px;
+	width: 10px;
+	background: yellow;
+}
+
+.list_header {
+	font-weight: bold;
+}
