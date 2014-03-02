@@ -24,6 +24,9 @@ if(is_null($source_id)) {
 		<script type='text/javascript' src='js/List.js'></script>
 		<script type='text/javascript' src='js/app_lib.js'></script>
 		<script type='text/javascript' src='js/editable_text.js'></script>
+
+		<script type='text/javascript' src='js/CopyButton.js'></script>
+
 		<script type='text/x-mathjax-config'>
 			MathJax.Hub.Config(
 				{tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});

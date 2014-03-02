@@ -62,6 +62,29 @@ function save_snip(data, callback, backlink) {
 	});
 }
 
+function update_source_bib_code(source_obj, callback, backlink) {
+	
+	// expects data in this form:
+	//	{
+	//		'id':source_id,
+	//		'bib_code':bib_code,
+	//	}
+	//
+	
+	$.ajax({
+		'url' : 'php/update_source_bib_code.php',
+		'type': 'POST',
+		'data': source_obj,
+		'dataType': 'json',
+		'success': function(data, textStatus, jqXHR) {
+			callback(data, backlink);
+		},
+		'error': function(jqXHR, status, err) {
+			alert(err);
+		}
+	});
+}
+
 function update_snip(snip_obj, callback, backlink) {
 	
 	// expects data in this form:

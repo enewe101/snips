@@ -3,6 +3,7 @@ var page = 1;
 var clip_id_inc = 1;
 var pdf_viewer;
 var notes_viewer;
+var bib_code_display;
 
 function init() {
 
@@ -13,6 +14,32 @@ function init() {
 	var  notes_wrapper = $('<div id="notes_wrapper" />');
 
 	right.append(pdf_wrapper);
+
+
+	// quickly add a widget to show the bibcode
+	bib_code_display = $('<input id="bib_code_display" type="text"/>');
+	var bib_code_wrapper = $('<div id="bib_code" />');
+	var bib_code_button = new CopyButton({'wrapper':bib_code_wrapper});
+	bib_code_button.set_target(bib_code_display);
+
+	bib_code_update_button = $('<input type="button" value="update" />');
+	bib_code_update_button.click(function() {
+		update_source_bib_code(
+			{
+				"id":source_id,
+				"bib_code":bib_code_display.val()
+			},
+			on_updated_bib_code
+		);
+	});
+
+	var bib_code_updated_icon = $('<span id="bib_code_updated_icon">');
+
+	left.append(bib_code_display);
+	left.append(bib_code_update_button);
+	left.append(bib_code_updated_icon);
+	left.append(bib_code_wrapper);
+
 	left.append($('<h2>Notes</h2>'));
 	left.append(notes_wrapper);
 	middle.append(right);
@@ -64,9 +91,14 @@ function init() {
 	
 }
 
+function on_updated_bib_code(data) {
+	$('#bib_code_updated_icon').text('updated!');
+}
 
 function on_get_source(data) {
 	data = data[0];
+	bib_code_display.val(data['bib_code']);
+
 	var url = 'pdfs/' + data['path'];
 	pdf_viewer.get_document(url); 
 }
