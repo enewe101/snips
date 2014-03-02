@@ -1,9 +1,43 @@
-function List(options) {
+//	Used to place vertically aligned elements on a page, somewhat like a 
+//	table, but with a bit more more flexibility.
+//
+//	Basic usage:
+//	============
+//	1) 	Bulid a new list object:
+//
+//			var my_list = new List(specification);
+//
+//		Where:
+//		specification := {
+//			'wrapper' : <jQuery>,		// i.e. html element gotten with $()
+//			'num_cols' : <number>, 		// number of colums per list row
+//			'has_checks': <bool>,		// include checkboxes on each row
+//			'has_list_sep': <bool>,		// include separator elements 
+//		}
+//
+//	2) Add stuff to it
+//
+//			my_list.add_item(contents);
+//				(or) 	
+//			my_list.add_items([contents, contents, ...])
+//
+//		Where:
+//		contents := [item, item...]; and
+//		item := <string> | <jQuery> 
+//
 
+function List(options) {
+// All args passed in an options object
+
+	// Required 
 	this.wrapper = get_opt('wrapper', options, null);
 	this.num_cols = get_opt('num_cols', options, null);
+
+	// Optional
 	this.has_checks = get_opt('has_checks', options, false);
 	this.has_list_sep = get_opt('has_list_sep', options, false);
+
+	// State
 	this.items = [];
 
 	this.init = function() {

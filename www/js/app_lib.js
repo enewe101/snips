@@ -7,6 +7,22 @@ function get_opt(keyname, obj, default_val) {
 	}
 }
 
+function get_sources(filter_obj, callback, passthrough) {
+
+	$.ajax({
+		'url' : 'php/get_sources.php',
+		'type': 'POST',
+		'data': filter_obj,
+		'dataType': 'json',
+		'success': function(data, textStatus, jqXHR) {
+			callback(data, passthrough);
+		},
+		'error': function(jqXHR, status, err) {
+			alert(err);
+		}
+	});
+}
+
 function get_source(source_id, callback) {
 
 	$.ajax({
