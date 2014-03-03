@@ -1,0 +1,9 @@
+.basic_label {
+	float: left;
+	display: block;
+	width: 140px;
+}
+
+.input_wrapper {
+	margin: 4px;
+}

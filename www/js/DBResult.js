@@ -7,12 +7,12 @@
 // 	column names in the result set.  This would be useful if building some
 // 	kind of table view.
 //
-// 	The contructor argument `options.spec` is where to specify the fields
+// 	The contructor argument `options.field_specs` is where to specify the fields
 // 	that will be in the resultset, and how they should be treated.  For
-// 	example, if the specification for a given field in this.spec has 
-// 	`this.spec[#].do_show=false` then it would be excluded by certain getters
+// 	example, if the specification for a given field in this.field_specs has 
+// 	`this.field_specs[#].do_show=false` then it would be excluded by certain getters
 //
-//	The structure of this.spec is an array of specifications.  Each 
+//	The structure of this.field_specs is an array of specifications.  Each 
 //	specification is a plain object with some properties that define how the
 //	that field should be handled:
 //
@@ -24,18 +24,10 @@
 //	}
 //
 
-function DBResult(options) {
+function DBResult(field_specs, options) {
 
 	// Required parameters
-	this.spec = get_opt('spec', options, null);
-	this.calc_specs = get_opt('calc_specs', options, []);
-
-	// Validation
-	if(!$.isArray(this.calc_specs) && debug) {
-		alert('In DBResult(options): options.calc_specs should be <array>, '
-			+ 'found <' + typeof(this.calc_specs) + '>:\n' + this.calc_specs)
-	}
-	
+	this.field_specs = field_specs;
 
 	this.init = function() {
 	};
@@ -50,51 +42,21 @@ function DBResult(options) {
 	//
 	this.get_headers = function() {
 		var headers = [];
-		for(var i in this.spec) {
+		for(var i in this.field_specs) {
 
 			// don't include non-shown elements
-			if(!this.spec[i]['do_show']) {
+			if(!this.field_specs[i]['do_show']) {
 				continue;
 			}
 
-			if('disp_name' in this.spec[i]) {
-				headers.push(this.spec[i]['disp_name']);
-			} else if ('name' in this.spec[i]) {
-				headers.push(this.spec[i]['name']);
+			if('disp_name' in this.field_specs[i]) {
+				headers.push(this.field_specs[i]['disp_name']);
+			} else if ('name' in this.field_specs[i]) {
+				headers.push(this.field_specs[i]['name']);
 			} else {
-				alert('Could not find "name" or "disp_name" in DBResult.spec '
-					+ 'for field:\n' + this.spec[i].toSource());
+				alert('Could not find "name" or "disp_name" in DBResult.field_specs '
+					+ 'for field:\n' + this.field_specs[i].toSource());
 			}
-		}
-
-		for(var i in this.calc_specs) {
-			var spec = this.calc_specs[i];
-			if(!spec['do_show']) {
-				continue;
-			}
-
-			var splice_index = spec['splice_index'];
-			if(typeof(splice_index) != 'number') {
-				alert('In DBResult.get_headers(): Expected this.calc_specs['
-					+ i + '].splice_index to be <number>, but found <'
-					+ typeof(splice_index) + '>:\n' + splice_index);
-			}
-
-
-			var disp_name;
-			if('disp_name' in spec) {
-				disp_name = spec['disp_name'];
-
-			} else if('name' in spec) {
-				disp_name = spec['name'];
-
-			} else {
-				alert('In DBResult.get_headers(): Expected this.calc_specs['
-					+ i + '].disp_name or .name to be <string>s but they were '
-					+ '<undefined');
-			}
-
-			headers.splice(splice_index, 0, disp_name);
 		}
 
 		return headers;
@@ -110,8 +72,8 @@ function DBResult(options) {
 	//
 	this.get_row_length = function() {
 		var row_length = 0;
-		for(var i in this.spec) {
-			if(this.spec[i]['do_show']) {
+		for(var i in this.field_specs) {
+			if(this.field_specs[i]['do_show']) {
 				row_length += 1;
 			}
 		}
@@ -140,7 +102,7 @@ function DBResult(options) {
 
 
 	//// Get a list of row data field values (no field names) but only ones
-	// for which this.spec[#]['do_show'] is true.
+	// for which this.field_specs[#]['do_show'] is true.
 	//
 	// 	# no params #
 	//
@@ -150,17 +112,6 @@ function DBResult(options) {
 	// 		type.  The fields data within rows are sorted as this.specs.
 	//
 	this.get_display_list = function(calc_specs) {
-
-		calc_specs = this.calc_specs;
-
-		// Validation and normalization
-		if(typeof(calc_specs) == 'undefined'){
-			calc_specs = [];
-		} else if(!$.isArray(calc_specs)){
-			alert('In DBResult.get_display_list(calc_specs): \nexpected '
-				+ 'calc_specs to be <array>.  Found <' + typeof(calc_specs)
-				+ '>:\n' + calc_specs);
-		}
 
 		// loop variables
 		var return_list = [];
@@ -173,35 +124,33 @@ function DBResult(options) {
 			var app_row = [];
 
 			// Process each field, accumulate certain ones
-			for(var j in this.spec) {
+			for(var j in this.field_specs) {
+
+				var field_specs = this.field_specs[j];
+				var field_name = field_specs['name'];
 
 				// don't include entries for non-displayable entries
-				if(!this.spec[j]['do_show']) {
+				if(!field_specs['do_show']) {
 					continue;
 				}
 
-				var field_name = this.spec[j]['name'];
-				app_row.push(db_row[field_name]);
-			}
+				if('func' in field_specs && field_specs['func'] !== null) {
 
-			for(var j in calc_specs) {
-				var spec = calc_specs[j];
-				if(typeof(spec['func']) == 'function') {
-
-					var splice_index = spec['splice_index'];
-
-					// validation
-					if(typeof(splice_index) != 'number') {
-						alert('In DBResult.get_display_list(calc_specs): '
-							+ 'The calc_specs are expected to have <number> '
-							+ 'at calc_specs[' + i + ']["splice_index"], '
-							+ 'found <' + typeof(splice_index)
-							+ '>: \n' + splice_index);
+					// Validation
+					if(typeof(field_specs['func']) != 'function' && debug) {
+						alert('In DBResult.get_display_list():'
+							+ 'Fields should either have <function>, '
+							+ '<undefined> '
+							+ 'or null in field_specs.func.  Found <' 
+							+ typeof(field_specs['func']) + '>:\n\n'
+							+ field_specs['func']);
 					}
 
-					calculated_datum = spec['func'](db_row);
-					app_row.splice(splice_index, 0, calculated_datum);
-				}
+					app_row.push(field_specs['func'](db_row));
+
+				} else {
+					app_row.push(db_row[field_name]);
+				} 
 			}
 
 			return_list.push(app_row);

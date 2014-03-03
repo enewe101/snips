@@ -41,6 +41,10 @@ span.left {
 	float: left;
 }
 
+span.text_bold {
+	font-weight: bold;
+}
+
 .clear {
 	clear:both;
 }

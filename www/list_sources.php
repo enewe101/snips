@@ -27,6 +27,9 @@ if(is_null($source_id)) {
 		<script type='text/javascript' src='js/sources_controller.js'></script>
 		<script type='text/javascript' src='js/SourcesView.js'></script>
 		<script type='text/javascript' src='js/DBResult.js'></script>
+		<script type='text/javascript' src='js/Source.js'></script>
+		<script type='text/javascript' src='js/AddSource.js'></script>
+		<script type='text/javascript' src='js/FormFactory.js'></script>
 
 		<script type='text/x-mathjax-config'>
 			MathJax.Hub.Config(
@@ -34,11 +37,12 @@ if(is_null($source_id)) {
 		</script>
 		<script type='text/javascript' src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
+		<link rel='stylesheet' type='text/css' href='../../common/css/basic.css' />
 		<link rel='stylesheet' type='text/css' href='css/main.css' />
 		<link rel='stylesheet' type='text/css' href='css/list.css' />
 		<link rel='stylesheet' type='text/css' href='css/SourcesView.css' />
 		<link rel='stylesheet' type='text/css' href='css/NotesViewer.css' />
-		<link rel='stylesheet' type='text/css' href='../../common/css/basic.css' />
+		<link rel='stylesheet' type='text/css' href='css/form.css' />
 
 	</head>
 
