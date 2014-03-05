@@ -14,6 +14,8 @@ if(is_null($source_id)) {
 
 		<script type='text/javascript' src='../../common/js/jquery.js'>
 		</script>
+		<script type='text/javascript' src='../../common/js/utils.js'>
+		</script>
 		<script type='text/javascript' src='js/pdf.js'></script>
 		<script type='text/javascript'>
 			var debug = true;
@@ -29,7 +31,10 @@ if(is_null($source_id)) {
 		<script type='text/javascript' src='js/DBResult.js'></script>
 		<script type='text/javascript' src='js/Source.js'></script>
 		<script type='text/javascript' src='js/AddSource.js'></script>
+		<script type='text/javascript' src='js/FormJsonifier.js'></script>
 		<script type='text/javascript' src='js/FormFactory.js'></script>
+		<script type='text/javascript' src='js/FileInput.js'></script>
+		<script type='text/javascript' src='js/FormVerifier.js'></script>
 
 		<script type='text/x-mathjax-config'>
 			MathJax.Hub.Config(

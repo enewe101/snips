@@ -1,9 +1,78 @@
-.basic_label {
+.label_basic {
 	float: left;
 	display: block;
-	width: 140px;
+	width: 114px;
 }
 
 .input_wrapper {
 	margin: 4px;
+}
+
+.form_file_normal {
+	height: 16px;
+	float: left;
+	cursor: pointer;
+	padding: 2px 0 2px 0;
+	width: 150px;
+	overflow: hidden;
+
+	border-bottom: rgb(200,200,200) 1px solid;
+	border-right: rgb(200,200,200) 1px solid;
+	border-top: rgb(140,140,140) 1px solid;
+	border-left: rgb(140,140,140) 1px solid;
+}
+
+.add_source_left, .add_source_right {
+	float: left;
+	width: 324px;
+}
+
+.add_source_right {
+	margin-left: 20px;
+}
+
+.file_kill, .file_kill_hover {
+	display: block;
+	width: 20px;
+	height: 20px;
+	float: left;
+	cursor: pointer;
+	margin-left: 2px;
+}
+
+.file_kill {
+	background: url('../images/kill.png') no-repeat 3px 5px;
+}
+
+.file_kill_hover {
+	background: url('../images/kill_hover.png') no-repeat 3px 5px;
+}
+
+.form_file_hidden {
+	position: absolute;
+	top: -100px;
+}
+
+.text_input {
+	width: 150px;
+	height: 18px;
+	border-bottom: rgb(200,200,200) 1px solid;
+	border-right: rgb(200,200,200) 1px solid;
+	border-top: rgb(140,140,140) 1px solid;
+	border-left: rgb(140,140,140) 1px solid;
+}
+
+.button {
+	height: 18px;
+	border-top: rgb(200,200,200) 1px solid;
+	border-left: rgb(200,200,200) 1px solid;
+	border-bottom: rgb(140,140,140) 1px solid;
+	border-right: rgb(140,140,140) 1px solid;
+}
+
+#add_source_wrapper {
+	border: solid 1px rgb(120,120,120);
+	width: 668px;
+	padding: 10px;
+	margin: 20px;
 }

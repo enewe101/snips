@@ -47,10 +47,48 @@ function SourcesView(options) {
 			, 'disp_name':'id'
 			, 'type': 'string'
 			, 'do_show': false
-			, 'allow_write': false
 			, 'input_type': null
 			, 'is_required': false
-			, 'data_source': 'db'
+			, 'allow_write': false
+			, 'form_pos': null
+			, 'form_validation': null
+			, 'jax': null
+			, 'vax': null
+
+
+		}, {
+			'name': 'path'
+			, 'disp_name': ''
+			, 'type': 'html'
+			, 'do_show': true
+			, 'allow_write': false
+			, 'input_type': null
+			, 'is_required': null
+			, 'form_pos': null
+			, 'form_validation': null
+			, 'func': function(row) {
+
+				// build a link to the pdf
+				var href = 'http://shpow.com/snips/index.php?source_id=';
+				href +=  row['id'];
+				var link = $('<a />');
+				var disp_text = row['title'];
+				link.attr('href', href);
+
+				// display a pdf icon if there's a file for this record
+				var icon;
+				if(row['path']) {
+					icon = $('<div class="pdf_icon" />');
+
+				} else {
+					icon = $('<div class="no_pdf_icon" />');
+				}
+
+				link.append(icon);
+				return link;
+			}
+			, 'jax': null
+			, 'vax': null
 
 		}, {
 			'name': 'link_to_reader'
@@ -68,44 +106,16 @@ function SourcesView(options) {
 					link.text(disp_text);
 
 					return link;
+
 				} 
 
 			, 'allow_write': false
 			, 'input_type': null
 			, 'is_required': null
-
-			, 'splice_index' : 1
-
-		}, {
-			'name': 'title'
-			, 'disp_name': 'title'
-			, 'type': 'string'
-			, 'do_show': false
-			, 'allow_write': true
-			, 'input_type': 'text'
-			, 'is_required': true
-			, 'data_source': 'db'
-
-		}, {
-			'name': 'authors'
-			, 'disp_name': 'authors'
-			, 'type': 'string'
-			, 'do_show': true
-			, 'allow_write': true
-			, 'input_type': 'text'
-			, 'is_required': true
-			, 'data_source': 'db'
-
-
-		}, {
-			'name': 'pub_date'
-			, 'disp_name': 'year'
-			, 'type': 'date'
-			, 'do_show': true
-			, 'allow_write': true
-			, 'input_type': 'text'
-			, 'is_required': true
-			, 'data_source': 'db'
+			, 'form_pos': null
+			, 'form_validation': null
+			, 'jax': null
+			, 'vax': null
 
 		}, {
 			'name':'pdf'
@@ -115,7 +125,50 @@ function SourcesView(options) {
 			, 'allow_write': true
 			, 'input_type': 'file'
 			, 'is_required': false
-			, 'data_source': null
+			, 'form_pos': 'left'
+			, 'form_validation': 'text'
+			, 'jax': 'pass'
+			, 'vax': '_pdf'
+
+
+		}, {
+			'name': 'title'
+			, 'disp_name': 'title'
+			, 'type': 'string'
+			, 'do_show': false
+			, 'allow_write': true
+			, 'input_type': 'text'
+			, 'is_required': true
+			, 'form_pos': 'left'
+			, 'form_validation': 'req-text'
+			, 'jax': 'string'
+			, 'vax': 'string'
+
+		}, {
+			'name': 'authors'
+			, 'disp_name': 'authors'
+			, 'type': 'string'
+			, 'do_show': true
+			, 'allow_write': true
+			, 'input_type': 'text'
+			, 'is_required': true
+			, 'form_pos': 'left'
+			, 'form_validation': 'req-text'
+			, 'jax': 'author_jax'
+			, 'vax': 'string'
+
+		}, {
+			'name': 'pub_date'
+			, 'disp_name': 'year'
+			, 'type': 'date'
+			, 'do_show': true
+			, 'allow_write': true
+			, 'input_type': 'text'
+			, 'is_required': true
+			, 'form_pos': 'left'
+			, 'form_validation': 'req-year'
+			, 'jax': 'number'
+			, 'vax': 'year'
 
 		}, {
 			'name': 'pub_name'
@@ -125,7 +178,10 @@ function SourcesView(options) {
 			, 'allow_write': true
 			, 'input_type': 'text'
 			, 'is_required': false
-			, 'data_source': 'db'
+			, 'form_pos': 'left'
+			, 'form_validation': 'text'
+			, 'jax': 'string'
+			, 'vax': 'pass'
 
 		}, {
 			'name': 'vol'
@@ -135,7 +191,10 @@ function SourcesView(options) {
 			, 'allow_write': true
 			, 'input_type': 'text'
 			, 'is_required': false
-			, 'data_source': 'db'
+			, 'form_pos': 'right'
+			, 'form_validation': 'text'
+			, 'jax': 'string'
+			, 'vax': 'pass'
 
 		}, {
 			'name': 'issue'
@@ -145,7 +204,10 @@ function SourcesView(options) {
 			, 'allow_write': true
 			, 'input_type': 'text'
 			, 'is_required': false
-			, 'data_source': 'db'
+			, 'form_pos': 'right'
+			, 'form_validation': 'text'
+			, 'jax': 'string'
+			, 'vax': 'pass'
 
 		}, {
 			'name': 'start_page'
@@ -155,7 +217,10 @@ function SourcesView(options) {
 			, 'allow_write': true
 			, 'input_type': 'text'
 			, 'is_required': false
-			, 'data_source': 'db'
+			, 'form_pos': 'right'
+			, 'form_validation': 'integer'
+			, 'jax': 'number'
+			, 'vax': '_int'
 
 		}, {
 			'name': 'end_page'
@@ -165,27 +230,10 @@ function SourcesView(options) {
 			, 'allow_write': true
 			, 'input_type': 'text'
 			, 'is_required': false
-			, 'data_source': 'db'
-
-		}, {
-			'name': 'create_date'
-			, 'disp_name': 'created on'
-			, 'type': 'date'
-			, 'do_show': false
-			, 'allow_write': false
-			, 'input_type': null
-			, 'is_required': false
-			, 'data_source': 'db'
-
-		}, {
-			'name': 'modify_date'
-			, 'disp_name': 'last modified'
-			, 'type': 'date'
-			, 'do_show': false
-			, 'allow_write': false
-			, 'input_type': null
-			, 'is_required': false
-			, 'data_source': 'db'
+			, 'form_pos': 'right'
+			, 'form_validation': 'integer'
+			, 'jax': 'number'
+			, 'vax': '_int'
 
 		}, {
 			'name':'bib_code'
@@ -195,7 +243,36 @@ function SourcesView(options) {
 			, 'allow_write': true
 			, 'input_type': 'text'
 			, 'is_required': false
-			, 'data_source': 'db'
+			, 'form_pos': 'right'
+			, 'form_validation': 'text'
+			, 'jax': 'string'
+			, 'vax': 'pass'
+
+		}, {
+			'name': 'create_date'
+			, 'disp_name': 'created on'
+			, 'type': 'date'
+			, 'do_show': false
+			, 'allow_write': false
+			, 'input_type': null
+			, 'is_required': false
+			, 'form_pos': null
+			, 'form_validation': null
+			, 'jax': null
+			, 'vax': null
+
+		}, {
+			'name': 'modify_date'
+			, 'disp_name': 'last modified'
+			, 'type': 'date'
+			, 'do_show': false
+			, 'allow_write': false
+			, 'input_type': null
+			, 'is_required': false
+			, 'form_pos': null
+			, 'form_validation': null
+			, 'jax': null
+			, 'vax': null
 
 		} 
 	];

@@ -2,3 +2,12 @@
 	width: 1000px;
 	border: 1px solid rgb(100,100,100);
 }
+
+.pdf_icon, .no_pdf_icon {
+	width: 16px;
+	height: 16px;
+}
+
+.pdf_icon {
+	background: url('../../common/images/pdficon_small.png');
+}
