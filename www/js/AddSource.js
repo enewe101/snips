@@ -108,8 +108,8 @@ function AddSource(wrapper, field_specs,  options) {
 
 
 		this.submit_button = this.add_form.get_submit();
-		//this.arm_before_submit();
-		//this.arm_after_submit();
+		this.arm_before_submit();
+		this.arm_after_submit();
 
 		this.form.append(this.submit_button);
 	}

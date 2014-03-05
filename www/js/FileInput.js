@@ -111,12 +111,9 @@ function FileInput(options) {
 
 	}
 
-	this.val = function(value) {
-		if(typeof(value) != 'undefined') {
-			this.file_kill.click()
-		} else {
-			return this.input.val();
-		}
+	// Note, unlike for other form controls, this cannot set the value.
+	this.val = function() {
+		return this.input.val();
 	};
 
 	this.get_wrapper = function() {
