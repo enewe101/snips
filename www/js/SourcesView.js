@@ -1,13 +1,14 @@
 function SourcesView(options) {
 
 	this.wrapper = get_opt('wrapper', options, null);
-	this.source_list_wrapper;
-	this.list;
 
 	this.init = function() {
+
+		// Make an anchor for the Source Adder Form
 		this.add_source_wrapper = $('<div id="add_source_wrapper" />');
 		this.wrapper.append(this.add_source_wrapper);
 
+		// Make an anchor for the  Source List 
 		this.source_list_wrapper = $('<div id="source_list_wrapper" />');
 		this.wrapper.append(this.source_list_wrapper);
 
@@ -57,6 +58,44 @@ function SourcesView(options) {
 
 
 		}, {
+			'name': 'delete_icon'
+			, 'disp_name': ''
+			, 'type': 'html'
+			, 'do_show': true
+			, 'allow_write': false
+			, 'input_type': null
+			, 'is_required': null
+			, 'form_pos': null
+			, 'form_validation': null
+			, 'data_func': function(row) {
+				try {
+					var kill_button = new KillButton();
+				} catch(e) {
+					alert(e);
+				}
+				kill_button.click(function(r) {
+					return function(e) {
+						if(!confirm('really delete:\n' + r['title'] + '?')) {
+							return false;
+						}
+						var source_id = r['id'];
+						var passthrough = 3;
+						var callback = function(list, row_id) {
+							return function(reply, passthrough) {
+								list.remove_by_phone_number(row_id);
+							};
+						}($(this).data('list'), $(this).data('list_row_id'));
+
+						delete_source({'id':source_id},callback,passthrough);
+					};
+				}(row));
+				var icon = kill_button.get();
+				return icon;
+			}
+			, 'jax': null
+			, 'vax': null
+
+		}, {
 			'name': 'path'
 			, 'disp_name': ''
 			, 'type': 'html'
@@ -66,7 +105,7 @@ function SourcesView(options) {
 			, 'is_required': null
 			, 'form_pos': null
 			, 'form_validation': null
-			, 'func': function(row) {
+			, 'data_func': function(row) {
 
 				// build a link to the pdf
 				var href = 'http://shpow.com/snips/index.php?source_id=';
@@ -95,7 +134,7 @@ function SourcesView(options) {
 			, 'disp_name': 'title'
 			, 'type': 'string'
 			, 'do_show': true
-			, 'func': function(row) {
+			, 'data_func': function(row) {
 				
 					// build a link to a reading view of the source
 					var href = 'http://shpow.com/snips/index.php?source_id=';
@@ -280,3 +319,4 @@ function SourcesView(options) {
 
 	this.init();
 }
+

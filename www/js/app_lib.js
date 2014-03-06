@@ -125,6 +125,21 @@ function update_snip(snip_obj, callback, backlink) {
 	});
 }
 
+function delete_source(snip_obj, callback, passthrough) {
+	$.ajax({
+		'url' : 'php/delete_source.php',
+		'type': 'POST',
+		'data': snip_obj,
+		'dataType': 'json',
+		'success': function(data, textStatus, jqXHR) {
+			callback(data, passthrough);
+		},
+		'error': function(jqXHR, status, err) {
+			alert('error' + ': ' + err);
+		}
+	});
+}
+
 function delete_snip(snip_obj, callback, backlink) {
 	$.ajax({
 		'url' : 'php/delete_snip.php',

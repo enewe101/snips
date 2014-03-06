@@ -40,6 +40,8 @@ function List(options) {
 	// State
 	this.items = [];
 	this.header_items = [];
+	this.phonebook = {};
+	this.phone_inc = 0;
 	this.table;
 
 	// Validations
@@ -47,18 +49,41 @@ function List(options) {
 		alert('List(options) expects options.wrapper to be a jQuery');
 	}
 
+	this.get_phone_number = function() {
+		this.phone_inc += 1;
+		return this.phone_inc - 1;
+	}
 
 	this.init = function() {
 		this.table = $('<table class="list_table" />');
 		this.wrapper.append(this.table);
 	};
 
+	this.remove_by_phone_number = function(phone_number) {
+		var index = this.phonebook[phone_number];
+		this.remove(index);
+	}
+
 	this.remove = function(index) {
-		var item_to_remove = this.items[index];
+		//alert('removing: ' + index);
+		var item_to_remove = this.items[index]['wrapper'];
 		item_to_remove.remove();
 		this.items.splice(index, 1);
+		this.delete_in_phonebook(index);
 	};
 
+	this.delete_in_phonebook = function(index) {
+		var entry_to_delete;
+		for(x in this.phonebook) {
+			if(this.phonebook[x] > index) {
+				this.phonebook[x] -= 1;
+
+			} else if(this.phonebook[x] == index) {
+				entry_to_delete = x;
+			}
+		}
+		delete this.phonebook[entry_to_delete];
+	};
 
 	this.add_items = function(content_rows, are_headers) {
 
@@ -135,6 +160,7 @@ function List(options) {
 
 		// add each piece of content for the row
 		new_row_elms['elms'] = [];
+		var new_phone_number = this.get_phone_number();
 		for(var i=0; i<this.num_cols; i++) {
 
 			// add vertical separators between elements on a row
@@ -145,13 +171,10 @@ function List(options) {
 
 			var new_elm = $('<td class="list_elm">');
 			var content = content_row[i];
-			if(typeof(content) == 'undefined') {
-				alert('i:'+i);
-				alert('length:'+this.items.length);
-				alert('is_header:'+is_header);
-			}
 			
 			if(content instanceof jQuery) {
+				content.data('list', this);
+				content.data('list_row_id', new_phone_number);
 				new_elm.append(content);
 
 			} else if(typeof(content)=='string') {
@@ -194,6 +217,7 @@ function List(options) {
 		}
 
 		add_to_list.splice(index, 0, new_row_elms);
+		this.phonebook[new_phone_number] = index;
 
 		return new_row_elms;
 	}

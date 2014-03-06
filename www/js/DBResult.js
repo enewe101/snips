@@ -134,19 +134,19 @@ function DBResult(field_specs, options) {
 					continue;
 				}
 
-				if('func' in field_specs && field_specs['func'] !== null) {
+				if('data_func' in field_specs && field_specs['data_func'] !== null) {
 
 					// Validation
-					if(typeof(field_specs['func']) != 'function' && debug) {
+					if(typeof(field_specs['data_func']) != 'function' && debug) {
 						alert('In DBResult.get_display_list():'
 							+ 'Fields should either have <function>, '
 							+ '<undefined> '
-							+ 'or null in field_specs.func.  Found <' 
-							+ typeof(field_specs['func']) + '>:\n\n'
-							+ field_specs['func']);
+							+ 'or null in field_specs.data_func.  Found <' 
+							+ typeof(field_specs['data_func']) + '>:\n\n'
+							+ field_specs['data_func']);
 					}
 
-					app_row.push(field_specs['func'](db_row));
+					app_row.push(field_specs['data_func'](db_row));
 
 				} else {
 					app_row.push(db_row[field_name]);
