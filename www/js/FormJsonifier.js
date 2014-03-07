@@ -48,7 +48,7 @@ function FormJsonifier(inputs, specs) {
 				+ 'already has a jax named "' + jax_name + '".');
 		} 
 		
-		validate(jax, 'function', 'JsonifyForm.add_jax', 'jax');
+		validate('JsonifyForm.add_jax', jax, 'function');
 
 		this.jax[jax_name] = jax;
 	};

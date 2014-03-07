@@ -55,6 +55,7 @@ function SourcesView(options) {
 			, 'form_validation': null
 			, 'jax': null
 			, 'vax': null
+			, 'unjax' : null
 
 
 		}, {
@@ -94,6 +95,7 @@ function SourcesView(options) {
 			}
 			, 'jax': null
 			, 'vax': null
+			, 'unjax' : null
 
 		}, {
 			'name': 'path'
@@ -128,6 +130,7 @@ function SourcesView(options) {
 			}
 			, 'jax': null
 			, 'vax': null
+			, 'unjax' : null
 
 		}, {
 			'name': 'link_to_reader'
@@ -155,6 +158,7 @@ function SourcesView(options) {
 			, 'form_validation': null
 			, 'jax': null
 			, 'vax': null
+			, 'unjax' : null
 
 		}, {
 			'name':'pdf'
@@ -168,6 +172,7 @@ function SourcesView(options) {
 			, 'form_validation': 'text'
 			, 'jax': 'pass'
 			, 'vax': '_pdf'
+			, 'unjax' : null
 
 
 		}, {
@@ -182,6 +187,7 @@ function SourcesView(options) {
 			, 'form_validation': 'req-text'
 			, 'jax': 'string'
 			, 'vax': 'string'
+			, 'unjax' : null
 
 		}, {
 			'name': 'authors'
@@ -195,6 +201,7 @@ function SourcesView(options) {
 			, 'form_validation': 'req-text'
 			, 'jax': 'author_jax'
 			, 'vax': 'string'
+			, 'unjax' : 'join_authors'
 
 		}, {
 			'name': 'pub_date'
@@ -208,6 +215,7 @@ function SourcesView(options) {
 			, 'form_validation': 'req-year'
 			, 'jax': 'number'
 			, 'vax': 'year'
+			, 'unjax' : null
 
 		}, {
 			'name': 'pub_name'
@@ -221,6 +229,7 @@ function SourcesView(options) {
 			, 'form_validation': 'text'
 			, 'jax': 'string'
 			, 'vax': 'pass'
+			, 'unjax' : null
 
 		}, {
 			'name': 'vol'
@@ -234,6 +243,7 @@ function SourcesView(options) {
 			, 'form_validation': 'text'
 			, 'jax': 'string'
 			, 'vax': 'pass'
+			, 'unjax' : null
 
 		}, {
 			'name': 'issue'
@@ -247,6 +257,7 @@ function SourcesView(options) {
 			, 'form_validation': 'text'
 			, 'jax': 'string'
 			, 'vax': 'pass'
+			, 'unjax' : null
 
 		}, {
 			'name': 'start_page'
@@ -260,6 +271,7 @@ function SourcesView(options) {
 			, 'form_validation': 'integer'
 			, 'jax': 'number'
 			, 'vax': '_int'
+			, 'unjax' : null
 
 		}, {
 			'name': 'end_page'
@@ -273,6 +285,7 @@ function SourcesView(options) {
 			, 'form_validation': 'integer'
 			, 'jax': 'number'
 			, 'vax': '_int'
+			, 'unjax' : null
 
 		}, {
 			'name':'bib_code'
@@ -286,6 +299,7 @@ function SourcesView(options) {
 			, 'form_validation': 'text'
 			, 'jax': 'string'
 			, 'vax': 'pass'
+			, 'unjax' : null
 
 		}, {
 			'name': 'create_date'
@@ -299,6 +313,7 @@ function SourcesView(options) {
 			, 'form_validation': null
 			, 'jax': null
 			, 'vax': null
+			, 'unjax' : null
 
 		}, {
 			'name': 'modify_date'
@@ -312,6 +327,7 @@ function SourcesView(options) {
 			, 'form_validation': null
 			, 'jax': null
 			, 'vax': null
+			, 'unjax' : null
 
 		} 
 	];

@@ -28,8 +28,31 @@ function AddSource(wrapper, field_specs,  options) {
 	}
 
 
+	this.unjax_author = function(val) {
+		validate(
+			'AddSource.unjax_author()', variable, spec, default_val, strict);
+
+		var authors = validate('AddSource.unjax_author()', 
+			JSON.parse(val), 'array');
+
+		for(x in authors) {
+			validate('AddSource.unjax_authors(val):', authors[x], 'array');
+			assert('AddSource.unjax_authors(val):', 
+				(authors[x].length == 2));
+
+			for(name in authors[x]) {
+				validate('AddSource.unjax_authors(val):', name, 'string');
+			}
+
+			authors[x] = authors[x].join(', ');
+		}
+
+		return authors.join('; ');
+	}
+
 	this.author_jax = function(val) {
 		authors = val
+		alert(val);
 		authors = authors.split(';');
 		for(var key in authors) {
 			authors[key] = authors[key].split(',');
@@ -47,6 +70,7 @@ function AddSource(wrapper, field_specs,  options) {
 			}
 			authors[key] = '["' + lname + '","' + fname + '"]';
 		}
+		//alert( '[' + authors.join(',') + ']');
 		return '[' + authors.join(',') + ']';
 	}
 
@@ -74,7 +98,7 @@ function AddSource(wrapper, field_specs,  options) {
 		this.wrapper.append($('<div class="clear" />'));
 
 		// Add an iframe.  This is used to simulate asyncronous file uploads
-		this.upload_target = $('<iframe id="upload_target" name="upload_target"src="#" style="height:1px;width:1px;border:none"  />');
+		this.upload_target = $('<iframe id="upload_target" name="upload_target"src="#" style="height:400px;width:400px;border:none"  />');
 		this.upload_target.attr('onload', 'GET_REPLY();');
 		this.wrapper.append(this.upload_target);
 
@@ -108,8 +132,7 @@ function AddSource(wrapper, field_specs,  options) {
 
 
 		this.submit_button = this.add_form.get_submit();
-		this.arm_before_submit();
-		this.arm_after_submit();
+		//this.arm_after_submit();
 
 		this.form.append(this.submit_button);
 	}
@@ -140,38 +163,6 @@ function AddSource(wrapper, field_specs,  options) {
 		};
 	}(this);
 
-	this.arm_before_submit = function(o) {
-		return function() {
-
-			this.add_form.before_submit(function(){
-
-				var authors = o.form_controls['authors']['input'].val();
-				o.authors_cache = authors;
-				authors = authors.split(';');
-				for(var key in authors) {
-					authors[key] = authors[key].split(',');
-					var fname, lname;
-					try {
-						lname = authors[key][0].trim();
-						try {
-							fname = authors[key][1].trim();
-						} catch(e) {
-							fname = '';
-						}
-					} catch(e) {
-						alert('Parse Error: Please check the format for'
-							+ '<authors>.  It should be Last, First; ...');
-					}
-					authors[key] = [lname, fname];
-				}
-				o.form_controls['authors']['input'].val(
-					authors.toSource());
-
-			});
-
-		};
-	}(this);
-	
 	this.init();
 
 }

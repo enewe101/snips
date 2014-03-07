@@ -4,13 +4,18 @@ var source_view;
 var sources_result;
 
 function init() {
-		var source_view_wrapper = $('#source_view_wrapper');
 
-		source_view = new SourcesView({
-			'wrapper':source_view_wrapper
-		});
+	var source_view_wrapper = $('#source_view_wrapper');
 
-		get_sources({}, on_get_sources);
+	try {
+	source_view = new SourcesView({
+		'wrapper':source_view_wrapper
+	});
+	} catch(e) {
+		alert(e);
+	}
+
+	get_sources({}, on_get_sources);
 }
 
 function on_get_sources(data, passthrough) {

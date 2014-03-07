@@ -32,7 +32,7 @@
 		, 'bib_code' => 'string'
 	);
 
-	//validate($posted_vars, $validations, 'put_source POST variables' );
+//>>	validate($posted_vars, $validations, 'put_source POST variables' );
 
 	// Start aggregating the values that will be inserted into the db
 	$insert_vars = array();
@@ -45,6 +45,8 @@
 	$first_author = $posted_vars['authors'][0];
 	$last_name = $first_author[0];
    	$first_name = $first_author[1];
+
+	echo var_dump($first_author);
 
 	# If the user hasn't set the bib_code, make one from author names and year
 	if(missing('bib_code')) {

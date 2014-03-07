@@ -124,6 +124,7 @@ function FormFactory(field_specs, options) {
 				alert(e);
 			}
 			this.form.submit();
+			alert('break');
 			this.jsonifier.revert();
 			this.after_submit_callback();
 

@@ -53,7 +53,7 @@ function FormStyler(inputs, specs) {
 				+ 'already has a flax named "' + vax_name + '".');
 		} 
 		
-		validate(flax, 'object', 'JsonifyForm.add_vax', 'flax');
+		validate('JsonifyForm.add_vax', flax, 'object', 'flax');
 
 		this.flax[vax_name] = flax;
 	};

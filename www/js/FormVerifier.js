@@ -48,7 +48,7 @@ function FormVerifier(inputs, specs) {
 				+ 'already has a vax named "' + vax_name + '".');
 		} 
 		
-		validate(vax, 'object', 'JsonifyForm.add_vax', 'vax');
+		validate('JsonifyForm.add_vax', vax, 'object');
 
 		this.vax[vax_name] = vax;
 	};
