@@ -1,29 +1,28 @@
-function Cascader(inputs, specs) {
+function Cascader(specs) {
 
 	this.cache = {};
 
-	this.jsonify = function() {
+	this.cascade = function(c_name, row) {
+		jaxed_row = []
 		for(var x in specs) {
 			var spec = specs[x];
 
 			// only consider fields  displayed in the form
-			if(!spec['allow_write']) {
-				continue;
-			}
+			spec = validate('Cascader.cascade(jax)', specs[x], 'object', null);
 
 			var name = spec['name'];
-			var jax = spec['jax'] || 'pass';
+			var jax = spec[c_name];
 
-			var input = inputs[name]['input'];
-			var val = input.val();
+			var val = row[name];
 			
 			// cache the original values
-			this.cache[name] = val;
+			this.cache[c_name][name] = val;
 			
 			// Jsonify the values in the form
-			input.val(this.jax[jax](val));
-
+			jaxed_row[name] = this['jax'][c_name][jax](val);
 		}
+
+		return jaxed_row;
 	};
 
 	this.revert = function() {

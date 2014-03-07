@@ -64,7 +64,7 @@ function FormFactory(field_specs, options) {
 
 		}
 
-		this.submit_elm = $('<input type="button" value="addd" />');
+		this.submit_elm = $('<input type="button" value="add" />');
 		this.arm_submit_elm();
 
 		try {
@@ -124,7 +124,6 @@ function FormFactory(field_specs, options) {
 				alert(e);
 			}
 			this.form.submit();
-			alert('break');
 			this.jsonifier.revert();
 			this.after_submit_callback();
 

@@ -68,6 +68,33 @@ function SourcesView(options) {
 			, 'is_required': null
 			, 'form_pos': null
 			, 'form_validation': null
+//			, 'data_func': function(row) {
+//				try {
+//					var kill_button = new KillButton();
+//				} catch(e) {
+//					alert(e);
+//				}
+
+//				var kill_button = $('<div>X</div>');
+//				kill_button.click(function(r) {
+//					return function(e) {
+//						if(!confirm('really delete:\n' + r['title'] + '?')) {
+//							return false;
+//						}
+//						var source_id = r['id'];
+//						var passthrough = 3;
+//						var callback = function(list, row_id) {
+//							return function(reply, passthrough) {
+//								list.remove_by_phone_number(row_id);
+//							};
+//						}($(this).data('list'), $(this).data('list_row_id'));
+//
+//						delete_source({'id':source_id},callback,passthrough);
+//					};
+//				}(row));
+//				return kill_button;
+//			}
+
 			, 'data_func': function(row) {
 				try {
 					var kill_button = new KillButton();
@@ -201,7 +228,37 @@ function SourcesView(options) {
 			, 'form_validation': 'req-text'
 			, 'jax': 'author_jax'
 			, 'vax': 'string'
-			, 'unjax' : 'join_authors'
+			, 'data_func' : function(row) {
+				var val = row['authors'];
+				//val = '[["a1", ""],["a2","a3"]]';
+
+				try {
+					val = JSON.parse(val);
+					for(x in val) {
+						val[x] = val[x].join(', ');
+						var length = val[x].length;
+						if(val[x].indexOf(', ') == (length - 2)) {
+							val[x] = val[x].slice(0,length-2);
+						}
+
+								
+					}
+					val = val.join('; ');
+				} catch(e) {
+					return val;
+				}
+
+//				if($.isArray(val) {
+//					for(x in val) {
+//						if($.isArray(val[x]) {
+//							val[x] = val[x].join(', ');
+//						}
+//					}
+//					val = val.join('; ');
+//				}
+
+				return val;
+			}
 
 		}, {
 			'name': 'pub_date'

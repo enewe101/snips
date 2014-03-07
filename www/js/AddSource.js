@@ -28,7 +28,7 @@ function AddSource(wrapper, field_specs,  options) {
 	}
 
 
-	this.unjax_author = function(val) {
+	this.unjax_authors = function(val) {
 		validate(
 			'AddSource.unjax_author()', variable, spec, default_val, strict);
 
@@ -52,7 +52,6 @@ function AddSource(wrapper, field_specs,  options) {
 
 	this.author_jax = function(val) {
 		authors = val
-		alert(val);
 		authors = authors.split(';');
 		for(var key in authors) {
 			authors[key] = authors[key].split(',');
@@ -70,7 +69,6 @@ function AddSource(wrapper, field_specs,  options) {
 			}
 			authors[key] = '["' + lname + '","' + fname + '"]';
 		}
-		//alert( '[' + authors.join(',') + ']');
 		return '[' + authors.join(',') + ']';
 	}
 
@@ -98,7 +96,7 @@ function AddSource(wrapper, field_specs,  options) {
 		this.wrapper.append($('<div class="clear" />'));
 
 		// Add an iframe.  This is used to simulate asyncronous file uploads
-		this.upload_target = $('<iframe id="upload_target" name="upload_target"src="#" style="height:400px;width:400px;border:none"  />');
+		this.upload_target = $('<iframe id="upload_target" name="upload_target"src="#" style="height:1px;width:1px;border:none"  />');
 		this.upload_target.attr('onload', 'GET_REPLY();');
 		this.wrapper.append(this.upload_target);
 
