@@ -1,3 +1,52 @@
+//function get_opt(keyname, obj, default_val) {
+//	if(keyname in obj) {
+//		return obj[keyname];
+//	} else {
+//		return default_val;
+//	}
+//}
+
+//function get_vax(obj, variable, spec, default_val, strict) {
+//
+//}
+
+
+function assert(loc, condition, msg) {
+	msg = msg || '';
+
+    if (!condition) {
+        alert('Assertion Error in ' + loc + '. ' + msg);
+    }
+}
+
+
+function validate(loc, variable, spec, default_val, suppress_validation) {
+
+	// By default, invalid input raises an error, but this can be suppressed
+	suppress_validation == suppress_validation || false;
+
+	// be strict by default
+	strict = (typeof(strict)=='undefined')? true: strict;
+
+	// just return the value if its the expected type
+	if(typeof(variable) == spec) {
+		return variable;
+
+	// if variable is undefined, and a default is specified, return default
+	} else if(typeof(default_val) !== 'undefined' 
+		&& typeof(variable) == 'undefined') {
+			return default_val;
+
+	// otherwise, if strict and not suppressed, 'raise' an error
+	} else if(strict && !suppress_validation) {
+		alert('Error');
+
+	// But if suppressed or not strict, just return the default value
+	} else {
+		return default_val;
+	}
+}
+
 /*
     -9007199254740990 to 9007199254740990
 */
