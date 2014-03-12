@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/common/php/db.php'; 
+require_once '../common/php/db.php'; 
 $conn = connect_db('uedwardn_clips');
 
 $source_id = get_var('source_id');
@@ -11,7 +11,7 @@ if(is_null($source_id)) {
 
 <html>
 	<head>
-		<script type='text/javascript' src='../../common/js/jquery.js'>
+		<script type='text/javascript' src='../common/js/jquery.js'>
 		</script>
 		<script type='text/javascript' src='js/pdf.js'></script>
 		<script type='text/javascript'>
