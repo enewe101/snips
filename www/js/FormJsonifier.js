@@ -1,4 +1,4 @@
-function Cascader(inputs, specs) {
+function FormJsonifier(inputs, specs) {
 
 	this.cache = {};
 

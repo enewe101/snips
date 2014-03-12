@@ -29,7 +29,6 @@ if(is_null($source_id)) {
 		<script type='text/javascript' src='js/sources_controller.js'></script>
 		<script type='text/javascript' src='js/SourcesView.js'></script>
 		<script type='text/javascript' src='js/DBResult.js'></script>
-		<script type='text/javascript' src='js/Source.js'></script>
 		<script type='text/javascript' src='js/AddSource.js'></script>
 		<script type='text/javascript' src='js/FormJsonifier.js'></script>
 		<script type='text/javascript' src='js/FormFactory.js'></script>
