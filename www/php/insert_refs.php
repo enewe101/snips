@@ -1,6 +1,6 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/common/php/db.php'; 
+require_once '../../common/php/db.php'; 
 $conn = connect_db('uedwardn_clips');
 
 $refs = file_get_contents('refs.txt');
