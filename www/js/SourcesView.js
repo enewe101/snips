@@ -137,7 +137,7 @@ function SourcesView(options) {
 			, 'data_func': function(row) {
 
 				// build a link to the pdf
-				var href = 'http://shpow.com/snips/index.php?source_id=';
+				var href = 'index.php?source_id=';
 				href +=  row['id'];
 				var link = $('<a />');
 				var disp_text = row['title'];
