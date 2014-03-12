@@ -2,7 +2,7 @@
 
 ### Did you remember to turn validation back on?
 
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/common/php/db.php'; 
+	require_once '../../common/php/db.php'; 
 	$TABLE_NAME = 'sources';
 	$DB_NAME = 'uedwardn_clips';
 

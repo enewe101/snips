@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/common/php/db.php'; 
+require_once '../../common/php/db.php'; 
 
 $ALLOWED_TABLES = array('clips');
 $DB_NAME = 'uedwardn_clips';
