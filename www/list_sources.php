@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/common/php/db.php'; 
+require_once '../common/php/db.php'; 
 $conn = connect_db('uedwardn_clips');
 
 $source_id = get_var('source_id');
@@ -12,9 +12,9 @@ if(is_null($source_id)) {
 <html>
 	<head>
 
-		<script type='text/javascript' src='../../common/js/jquery.js'>
+		<script type='text/javascript' src='../common/js/jquery.js'>
 		</script>
-		<script type='text/javascript' src='../../common/js/utils.js'>
+		<script type='text/javascript' src='../common/js/utils.js'>
 		</script>
 		<script type='text/javascript' src='js/pdf.js'></script>
 		<script type='text/javascript'>
@@ -42,7 +42,7 @@ if(is_null($source_id)) {
 		</script>
 		<script type='text/javascript' src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-		<link rel='stylesheet' type='text/css' href='../../common/css/basic.css' />
+		<link rel='stylesheet' type='text/css' href='../common/css/basic.css' />
 		<link rel='stylesheet' type='text/css' href='css/main.css' />
 		<link rel='stylesheet' type='text/css' href='css/list.css' />
 		<link rel='stylesheet' type='text/css' href='css/SourcesView.css' />

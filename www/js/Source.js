@@ -1,7 +1,7 @@
 function Source() {
 
 	this.data = {
-		'id':
+		'id': null
 		, 'bib_code': null
 		, 'doc_name': null
 		, 'authors': null
